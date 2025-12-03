@@ -22,11 +22,11 @@ module rx_core#(
     reg [1:0] state;
     reg [WIDTH-1:0] shift_reg;
 
-    // Biến nội bộ
+   
     reg [$clog2(SAMPLING_TICKS)-1:0] baud_cnt;
     reg [$clog2(WIDTH)-1:0] bit_cnt;
     
-    // Đồng bộ tín hiệu rx để tránh metastability
+    
     reg rx_sync1, rx_sync2;
 
     always @(posedge clk or negedge rst_n) begin
@@ -49,7 +49,7 @@ module rx_core#(
             rx_ready <= 1'b0;
             rx_error <= 1'b0;
         end else begin
-            rx_ready <= 1'b0; // Xóa ready sau 1 clock
+            rx_ready <= 1'b0; 
             
             case(state)
                 IDLE: begin
