@@ -1,8 +1,3 @@
-<img width="353" height="436" alt="image" src="https://github.com/user-attachments/assets/11668340-8a0b-4877-a134-ef00c263afa7" /># TrainingCTW_UART_ME
-Dưới đây là phiên bản được viết lại của nội dung bạn gửi, giữ nguyên thông tin kỹ thuật nhưng trình bày gọn gàng, dễ đọc hơn:
-
----
-
 # UART Implementation
 
 ## 📌 Giới thiệu
