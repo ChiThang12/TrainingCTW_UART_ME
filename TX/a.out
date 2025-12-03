@@ -1,0 +1,64 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000001a4a7b78b40 .scope module, "baud_gen" "baud_gen" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst_n";
+    .port_info 2 /OUTPUT 1 "baud_tick";
+P_000001a4a7b92830 .param/l "BAUD_RATE" 0 2 3, +C4<00000000000000000010010110000000>;
+P_000001a4a7b92868 .param/l "BAUD_TICK" 1 2 11, +C4<0000000000000000000000000000000000000000000000000000001010001011>;
+P_000001a4a7b928a0 .param/l "CLOCK_FREQ" 0 2 2, +C4<00000101111101011110000100000000>;
+P_000001a4a7b928d8 .param/l "DATA_WIDTH" 0 2 4, +C4<00000000000000000000000000001000>;
+v000001a4a7b92e90_0 .var "baud_tick", 0 0;
+o000001a4a7bc6fc8 .functor BUFZ 1, C4<z>; HiZ drive
+v000001a4a7b93040_0 .net "clk", 0 0, o000001a4a7bc6fc8;  0 drivers
+v000001a4a7b7bab0_0 .var "counter", 9 0;
+o000001a4a7bc7028 .functor BUFZ 1, C4<z>; HiZ drive
+v000001a4a7b7bb50_0 .net "rst_n", 0 0, o000001a4a7bc7028;  0 drivers
+E_000001a4a7bc5e00/0 .event negedge, v000001a4a7b7bb50_0;
+E_000001a4a7bc5e00/1 .event posedge, v000001a4a7b93040_0;
+E_000001a4a7bc5e00 .event/or E_000001a4a7bc5e00/0, E_000001a4a7bc5e00/1;
+    .scope S_000001a4a7b78b40;
+T_0 ;
+    %wait E_000001a4a7bc5e00;
+    %load/vec4 v000001a4a7b7bb50_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 10;
+    %assign/vec4 v000001a4a7b7bab0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000001a4a7b92e90_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v000001a4a7b7bab0_0;
+    %pad/u 64;
+    %cmpi/e 650, 0, 64;
+    %jmp/0xz  T_0.2, 4;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v000001a4a7b92e90_0, 0;
+    %pushi/vec4 0, 0, 10;
+    %assign/vec4 v000001a4a7b7bab0_0, 0;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v000001a4a7b7bab0_0;
+    %addi 1, 0, 10;
+    %assign/vec4 v000001a4a7b7bab0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v000001a4a7b92e90_0, 0;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "d:\CTWIntern\Training\UART_ME\TX\baud_gen.v";
