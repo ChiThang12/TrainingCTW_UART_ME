@@ -114,8 +114,4 @@ Với baud rate 9600 → thời gian truyền 1 byte ≈ **65 µs**.
 * Giao tiếp sensor/actuator
 * Trao đổi dữ liệu giữa các board điện tử
 
----
 
-Nếu bạn muốn, tôi có thể **thiết kế thêm sơ đồ minh họa trực quan** cho TX, RX, FIFO và Baud Rate để tài liệu nhìn chuyên nghiệp hơn.
-
-Bạn có muốn tôi làm không?
