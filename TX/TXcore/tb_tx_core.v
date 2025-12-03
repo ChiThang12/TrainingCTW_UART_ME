@@ -36,20 +36,20 @@ module tb_tx_core;
         $dumpvars(0, tb_tx_core);
     end
 
-    // Clock generation: 100 MHz
+
     initial clk = 0;
     always #5 clk = ~clk;
 
-    // Baud tick generation: mô phỏng tick (50 MHz)
+   
     initial baud_tick = 0;
     always #10 baud_tick = ~baud_tick;
 
     // Test sequence: gửi nhiều byte liên tiếp
-    reg [7:0] test_bytes [0:3]; // ví dụ 4 byte
+    reg [7:0] test_bytes [0:3]; 
     integer i;
 
     initial begin
-        // Initialize
+   
         rst_n = 0;
         tx_data_in = 8'h00;
         tx_start = 0;
@@ -57,7 +57,6 @@ module tb_tx_core;
         rst_n = 1;
         #20;
 
-        // Các byte muốn gửi
         test_bytes[0] = 8'hA5;
         test_bytes[1] = 8'h3C;
         test_bytes[2] = 8'hFF;
@@ -66,13 +65,12 @@ module tb_tx_core;
         // Gửi từng byte
         for(i=0; i<4; i=i+1) begin
             tx_data_in = test_bytes[i];
-            wait(!tx_busy);   // chờ transmitter rảnh
+            wait(!tx_busy);   
             tx_start = 1;
             #10;
             tx_start = 0;
         end
 
-        // Kết thúc simulation sau khi gửi xong
         #200;
         $finish;
     end

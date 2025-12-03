@@ -2,12 +2,12 @@
 `include "rx_core.v"
 module tb_rx_core;
 
-    // Parameters
+ 
     localparam WIDTH = 8;
     localparam SAMPLING_TICKS = 16;
     localparam STOP_BITS = 1;
 
-    // DUT signals
+
     reg clk;
     reg rst_n;
     reg rx;
@@ -17,7 +17,7 @@ module tb_rx_core;
     wire rx_ready;
     wire rx_error;
 
-    // Instantiate DUT
+
     rx_core #(
         .WIDTH(WIDTH),
         .SAMPLING_TICKS(SAMPLING_TICKS),
@@ -32,11 +32,11 @@ module tb_rx_core;
         .rx_error(rx_error)
     );
 
-    // Clock 50 MHz -> period 20 ns
+ 
     initial clk = 0;
     always #10 clk = ~clk;
 
-    // Generate baud tick
+ 
     integer bt_cnt = 0;
     initial baud_tick = 0;
     always @(posedge clk) begin
@@ -49,21 +49,20 @@ module tb_rx_core;
         end
     end
 
-    // Task gửi 1 byte UART
     task uart_send_byte(input [7:0] data);
         integer i;
         begin
-            // START bit
+        
             rx <= 0;
             repeat(SAMPLING_TICKS) @(posedge baud_tick);
 
-            // DATA bits (LSB first)
+ 
             for (i = 0; i < 8; i = i + 1) begin
                 rx <= data[i];
                 repeat(SAMPLING_TICKS) @(posedge baud_tick);
             end
             
-            // STOP bit
+  
             rx <= 1;
             repeat(SAMPLING_TICKS) @(posedge baud_tick);
         end

@@ -15,7 +15,7 @@ module tb_uart_tx;
     wire tx;
     wire busy;
 
-    // Instantiate DUT
+    
     uart_tx #(
         .WIDTH(WIDTH),
         .SAMPLING_TICKS(SAMPLING_TICKS)
@@ -29,17 +29,17 @@ module tb_uart_tx;
         .busy(busy)
     );
 
-    // Dump VCD
+
     initial begin
         $dumpfile("tb_uart_tx.vcd");
         $dumpvars(0, tb_uart_tx);
     end
 
-    // Clock: 100 MHz
+   
     initial clk = 0;
     always #5 clk = ~clk;
 
-    // Test sequence
+
     reg [7:0] test_bytes [0:3];
     integer i;
 
@@ -66,7 +66,7 @@ module tb_uart_tx;
             #10;
             wr_en = 0;
 
-            // Start transmission khi tx không busy và FIFO không rỗng
+            
             wait(!busy);
             start = 1;
             #10;
